@@ -22,7 +22,8 @@ public class TwitterJsonParser {
         List<Hashtag> hashtagList = new ArrayList<>();
 
         try {
-            JSONArray jsonArray = new JSONArray(hashtagJsonData);
+            JSONObject jsonObject = new JSONObject();
+            JSONArray jsonArray = (JSONArray) jsonObject.get("trends");
 
             for (int i=0; i<jsonArray.length();i++) {
                 JSONObject hashtagJsonObject = jsonArray.getJSONObject(i);
