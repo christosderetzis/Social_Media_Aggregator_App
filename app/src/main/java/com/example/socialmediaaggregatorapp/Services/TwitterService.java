@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -14,15 +15,15 @@ import okhttp3.Response;
 
 public class TwitterService {
 
-    public static final String Access_Token = "";
-    public static final String Access_Token_secret = "";
-    public static final String API_Key = "";
-    public static final String API_Key_secret = "";
+    public static final String Token = "";
+    public static final String Token_secret = "";
+    public static final String Consumer_key = "";
+    public static final String Consumer_key_secret = "";
 
     private TwitterOauthHeaderGenerator generator;
 
     public TwitterService() {
-        generator = new TwitterOauthHeaderGenerator(API_Key, API_Key_secret, Access_Token, Access_Token_secret);
+        generator = new TwitterOauthHeaderGenerator(Consumer_key, Consumer_key_secret, Token, Token_secret);
     }
 
     public String downloadHashtagData(String URL) throws IOException {
@@ -48,23 +49,23 @@ public class TwitterService {
 
         Response response = client.newCall(request).execute();
 
-        Log.d("SMA_App", response.body().string());
-        return response.body().string();
+        String result = response.body().string();
+        return result;
     }
 
-    private Map<String, String> getUrlValues(String url) throws UnsupportedEncodingException {
-        int i = url.indexOf("?");
-        Map<String, String> paramsMap = new HashMap<>();
-        if (i > -1) {
-            String searchURL = url.substring(url.indexOf("?") + 1);
-            String params[] = searchURL.split("&");
+        private Map<String, String> getUrlValues (String url) throws UnsupportedEncodingException {
+            int i = url.indexOf("?");
+            Map<String, String> paramsMap = new HashMap<>();
+            if (i > -1) {
+                String searchURL = url.substring(url.indexOf("?") + 1);
+                String params[] = searchURL.split("&");
 
-            for (String param : params) {
-                String temp[] = param.split("=");
-                paramsMap.put(temp[0], java.net.URLDecoder.decode(temp[1], "UTF-8"));
+                for (String param : params) {
+                    String temp[] = param.split("=");
+                    paramsMap.put(temp[0], java.net.URLDecoder.decode(temp[1], "UTF-8"));
+                }
             }
-        }
 
-        return paramsMap;
+            return paramsMap;
+        }
     }
-}

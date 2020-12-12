@@ -22,22 +22,32 @@ public class TwitterJsonParser {
         List<Hashtag> hashtagList = new ArrayList<>();
 
         try {
-            JSONObject jsonObject = new JSONObject();
-            JSONArray jsonArray = (JSONArray) jsonObject.get("trends");
+            JSONArray array = new JSONArray(hashtagJsonData);
+            JSONObject body = array.getJSONObject(0);
+            JSONArray hashtags = body.getJSONArray("trends");
 
-            for (int i=0; i<jsonArray.length();i++) {
-                JSONObject hashtagJsonObject = jsonArray.getJSONObject(i);
+            Log.d(TAG, "Length of json array: " + hashtags.length());
+            for (int i=0; i<hashtags.length();i++) {
+                JSONObject hashtagJsonObject = hashtags.getJSONObject(i);
                 String name = hashtagJsonObject.getString(TWEET_NAME);
                 String query = hashtagJsonObject.getString(TWEET_QUERY);
-                int tweet_volume = hashtagJsonObject.getInt(TWEET_VOLUME);
+                String tweet_volume_string = hashtagJsonObject.getString(TWEET_VOLUME);
 
+                Integer tweet_volume;
+                if (tweet_volume_string != "null") {
+                    tweet_volume = Integer.valueOf(tweet_volume_string);
+                } else {
+                    tweet_volume = 0;
+                }
                 Hashtag hashtag = new Hashtag();
                 hashtag.setName(name);
                 hashtag.setQuery(query);
                 hashtag.setTweet_volume(tweet_volume);
+
                 hashtagList.add(hashtag);
             }
         } catch (JSONException e) {
+            e.printStackTrace();
             Log.d(TAG, "Error while parsing hashtag json data");
         }
          return hashtagList;

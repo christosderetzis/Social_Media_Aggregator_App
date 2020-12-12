@@ -3,7 +3,7 @@ package com.example.socialmediaaggregatorapp.Models;
 public class Hashtag {
     private String name;
     private String query;
-    private int tweet_volume;
+    private Integer tweet_volume;
 
     public String getName() {
         return name;
@@ -21,11 +21,11 @@ public class Hashtag {
         this.query = query;
     }
 
-    public int getTweet_volume() {
+    public Integer getTweet_volume() {
         return tweet_volume;
     }
 
-    public void setTweet_volume(int tweet_volume) {
+    public void setTweet_volume(Integer tweet_volume) {
         this.tweet_volume = tweet_volume;
     }
 

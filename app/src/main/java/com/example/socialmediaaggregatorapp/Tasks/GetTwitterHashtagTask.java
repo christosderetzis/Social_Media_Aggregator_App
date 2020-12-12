@@ -28,14 +28,17 @@ public class GetTwitterHashtagTask  extends AsyncTask<String, Void, List<Hashtag
     protected List<Hashtag> doInBackground(String... strings) {
         String url = strings[0];
         Log.d(TAG, "Doing task in background for url: "  + url);
+
         String hashtagJson = null;
         try {
             hashtagJson = twitterService.downloadHashtagData(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         TwitterJsonParser jsonParser = new TwitterJsonParser();
-        return jsonParser.parseHashtagData(hashtagJson);
+        List<Hashtag> results = jsonParser.parseHashtagData(hashtagJson);
+        return results;
     }
 
     @Override

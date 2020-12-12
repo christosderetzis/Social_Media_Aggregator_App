@@ -17,12 +17,11 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String URL = "https://api.twitter.com/1.1/trends/place.json?id=1";
+    public static final String URL = "https://api.twitter.com/1.1/trends/place.json?id=23424833";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ListView hashtagListView = (ListView) findViewById(R.id.hashtagListView);
 
         HashtagArrayAdapter adapter = new HashtagArrayAdapter(this, R.layout.hashtag_item, new ArrayList<Hashtag>(), hashtagListView);

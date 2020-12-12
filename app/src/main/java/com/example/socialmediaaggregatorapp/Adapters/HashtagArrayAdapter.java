@@ -53,9 +53,14 @@ public class HashtagArrayAdapter extends ArrayAdapter<Hashtag> {
 
         Hashtag currentHashtag = hashtags.get(position);
 
-        viewHolder.position.setText(position + ".");
+        viewHolder.position.setText((position + 1) + ".");
         viewHolder.hashtagText.setText(currentHashtag.getName());
-        viewHolder.hashtagText.setText(currentHashtag.getTweet_volume() + " tweets");
+
+        if (currentHashtag.getTweet_volume() != 0) {
+            viewHolder.tweetVolume.setText(currentHashtag.getTweet_volume() + " tweets");
+        } else {
+            viewHolder.tweetVolume.setText(" ");
+        }
 
         return convertView;
     }
