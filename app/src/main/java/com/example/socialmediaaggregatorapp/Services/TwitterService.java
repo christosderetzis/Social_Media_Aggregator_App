@@ -26,34 +26,40 @@ public class TwitterService {
         generator = new TwitterOauthHeaderGenerator(Consumer_key, Consumer_key_secret, Token, Token_secret);
     }
 
-    public String downloadHashtagData(String URL) throws IOException {
+    public String downloadTwitterData(String URL) throws IOException {
 
         // get authorization header for request
         Map<String, String> requestParams = getUrlValues(URL);
-        Log.d("SMA_App", requestParams.toString());
 
+        // divide main url from its parameters
         String url_without_parameters = URL.substring(0, URL.indexOf("?"));
         String authorization_header = generator.generateHeader("GET", url_without_parameters, requestParams);
 
         Log.d("SMA_App", authorization_header);
 
+
         OkHttpClient client = new OkHttpClient()
                 .newBuilder()
                 .build();
 
+        // Send request data to the twitter server
         Request request = new Request.Builder()
                 .addHeader("Authorization", authorization_header)
                 .method("GET", null)
                 .url(URL)
                 .build();
 
+        // Get the response data
         Response response = client.newCall(request).execute();
 
+        // Get the body from response and convert it to string
         String result = response.body().string();
         return result;
     }
 
-        private Map<String, String> getUrlValues (String url) throws UnsupportedEncodingException {
+
+
+    private Map<String, String> getUrlValues (String url) throws UnsupportedEncodingException {
             int i = url.indexOf("?");
             Map<String, String> paramsMap = new HashMap<>();
             if (i > -1) {
@@ -65,7 +71,6 @@ public class TwitterService {
                     paramsMap.put(temp[0], java.net.URLDecoder.decode(temp[1], "UTF-8"));
                 }
             }
-
             return paramsMap;
         }
     }
