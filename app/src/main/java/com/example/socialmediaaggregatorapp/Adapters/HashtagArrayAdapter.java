@@ -30,6 +30,7 @@ public class HashtagArrayAdapter extends ArrayAdapter<Hashtag> {
         hashtags = objects;
         inflater = LayoutInflater.from(context);
         layoutResource = resource;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -66,6 +67,9 @@ public class HashtagArrayAdapter extends ArrayAdapter<Hashtag> {
     }
 
     public void setHashtags(List<Hashtag> hashtags) {
+        if (this.hashtags != null) {
+            this.hashtags = null;
+        }
         this.hashtags = hashtags;
         hashtagListView.setAdapter(this);
     }
