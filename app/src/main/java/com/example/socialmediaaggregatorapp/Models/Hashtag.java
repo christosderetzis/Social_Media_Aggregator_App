@@ -1,6 +1,8 @@
 package com.example.socialmediaaggregatorapp.Models;
 
-public class Hashtag {
+import java.io.Serializable;
+
+public class Hashtag implements Serializable {
     private String name;
     private String query;
     private Integer tweet_volume;

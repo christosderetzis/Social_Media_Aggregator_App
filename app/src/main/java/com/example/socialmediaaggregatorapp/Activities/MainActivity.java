@@ -1,9 +1,12 @@
-package com.example.socialmediaaggregatorapp;
+package com.example.socialmediaaggregatorapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -11,11 +14,13 @@ import android.widget.TextView;
 
 import com.example.socialmediaaggregatorapp.Adapters.HashtagArrayAdapter;
 import com.example.socialmediaaggregatorapp.Models.Hashtag;
+import com.example.socialmediaaggregatorapp.R;
 import com.example.socialmediaaggregatorapp.Tasks.GetTrendingHashtagsTask;
 import com.example.socialmediaaggregatorapp.Tasks.SearchHashtagsTask;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
                 // Get results from backend
                 SearchHashtagsTask searchHashtagsTask = new SearchHashtagsTask(searchQuery, adapter);
                 searchHashtagsTask.execute();
+            }
+        });
+
+        hashtagListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Hashtag hashtag = (Hashtag) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(MainActivity.this, PostsActivity.class);
+                intent.putExtra("hashtag", hashtag);
+
+                startActivity(intent);
             }
         });
     }

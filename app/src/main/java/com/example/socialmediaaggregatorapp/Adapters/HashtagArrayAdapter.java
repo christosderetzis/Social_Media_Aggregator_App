@@ -38,6 +38,12 @@ public class HashtagArrayAdapter extends ArrayAdapter<Hashtag> {
         return hashtags.size();
     }
 
+    @Nullable
+    @Override
+    public Hashtag getItem(int position) {
+        return (hashtags != null && hashtags.size() >= position) ? hashtags.get(position) : null;
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
