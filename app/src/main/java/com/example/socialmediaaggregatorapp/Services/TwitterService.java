@@ -15,10 +15,10 @@ import okhttp3.Response;
 
 public class TwitterService {
 
-    public static final String Token = "706907411873931264-WOVVPLgbxvU5IL6GtxVRT1WUiVMxy0W";
-    public static final String Token_secret = "mNj338uAX1mMCkLJP51d5Gi9ZKIdZXPf3alxyj3B3oSLp";
-    public static final String Consumer_key = "le9u9MVYJ3Zr8ULLmbu4rEDWb";
-    public static final String Consumer_key_secret = "aja0OIUjLvBrU95IDCsl1ErcSwL8rIvOypUndS3owpUp4tsKUE";
+    public static final String Token = "";
+    public static final String Token_secret = "";
+    public static final String Consumer_key = "";
+    public static final String Consumer_key_secret = "";
 
     private TwitterOauthHeaderGenerator generator;
 
