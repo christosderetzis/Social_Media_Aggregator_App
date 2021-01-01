@@ -13,13 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.socialmediaaggregatorapp.Models.Hashtag;
 import com.example.socialmediaaggregatorapp.Models.Post;
 import com.example.socialmediaaggregatorapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class PostsArrayAdapter extends ArrayAdapter<Post> {
     private List<Post> postsList;
