@@ -52,12 +52,15 @@ public class GetTrendingHashtagsTask extends AsyncTask<String, Void, List<Hashta
                 } else {
                     tweet_volume = 0;
                 }
-                Hashtag hashtag = new Hashtag();
-                hashtag.setName(name);
-                hashtag.setQuery(query);
-                hashtag.setTweet_volume(tweet_volume);
 
-                hashtagList.add(hashtag);
+                if (name.contains("#")){
+                    Hashtag hashtag = new Hashtag();
+                    hashtag.setName(name);
+                    hashtag.setQuery(query);
+                    hashtag.setTweet_volume(tweet_volume);
+
+                    hashtagList.add(hashtag);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

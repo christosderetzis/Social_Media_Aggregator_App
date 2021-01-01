@@ -14,8 +14,10 @@ import okhttp3.Response;
 public class InstagramService {
     public static final String access_token = "";
 
-    public InstagramService(){
+    private String instagramIdAccount;
 
+    public InstagramService(String id){
+        instagramIdAccount = id;
     }
 
     public String downloadInstagramData(String URL) throws IOException {
@@ -59,5 +61,9 @@ public class InstagramService {
             }
         }
         return paramsMap;
+    }
+
+    public String getInstagramIdAccount() {
+        return instagramIdAccount;
     }
 }
