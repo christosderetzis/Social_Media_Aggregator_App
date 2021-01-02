@@ -18,6 +18,7 @@ import java.util.List;
 public class GetTrendingHashtagsTask extends AsyncTask<String, Void, List<Hashtag>> {
     public static final String TAG = "SMA_App";
     public static final String TRENDS_URL = "https://api.twitter.com/1.1/trends/place.json?id=23424833";
+
     public static final String TWEET_NAME = "name";
     public static final String TWEET_QUERY = "query";
     public static final String TWEET_VOLUME = "tweet_volume";

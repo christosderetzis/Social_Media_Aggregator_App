@@ -25,9 +25,9 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
     private final int layoutResource;
     private ListView postsListView;
 
-    public static final String FACEBOOK_ICON = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/240px-Facebook_logo_%28square%29.png";
-    public static final String TWITTER_ICON = "https://el.wikipedia.org/wiki/Twitter#/media/%CE%91%CF%81%CF%87%CE%B5%CE%AF%CE%BF:Twitter_bird_logo_2012.png";
-    public static final String INSTAGRAM_ICON = "https://en.wikipedia.org/wiki/File:Instagram_logo_2016.svg";
+    public static final String FACEBOOK_ICON = "https://www.vectorico.com/download/social_media/Facebook-Logo-Square.jpg";
+    public static final String TWITTER_ICON = "https://www.vectorico.com/download/social_media/Twitter-Logo-Blue.jpg";
+    public static final String INSTAGRAM_ICON = "https://www.tailorbrands.com/wp-content/uploads/2020/03/The_Instagram_Logo.jpg";
     public static final String UNKNOWN_USER_ICON = "https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg";
 
     public PostsArrayAdapter(@NonNull Context context, int resource, @NonNull List<Post> objects, ListView listView) {
@@ -37,6 +37,8 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
         inflater = LayoutInflater.from(context);
         layoutResource = resource;
     }
+
+
 
     @Override
     public int getCount() {
@@ -52,11 +54,11 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        PostsArrayAdapter.ViewHolder viewHolder;
+        ViewHolder viewHolder;
 
         if (convertView == null) {
             convertView = inflater.inflate(layoutResource, parent, false);
-            viewHolder = new PostsArrayAdapter.ViewHolder(convertView);
+            viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
             Log.w("VIEW_HOLDER", "View Holder Created");
         } else {
@@ -66,41 +68,41 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
         Post post = postsList.get(position);
 
         // Load profile image of user if there is one
-        if (post.getProfileImage().equals(null)){
-            Picasso.get().load(UNKNOWN_USER_ICON).into(viewHolder.profileImage);
-        } else {
+        if (post.getProfileImage() != null){
             Picasso.get().load(post.getProfileImage()).into(viewHolder.profileImage);
+        } else {
+            Picasso.get().load(UNKNOWN_USER_ICON).into(viewHolder.profileImage);
         }
 
         // Update username
-        if (post.getUsername().equals(null)){
-            viewHolder.usernameText.setText("Unknown user");
-        } else {
+        if (post.getUsername() != null){
             viewHolder.usernameText.setText(post.getUsername());
+        } else {
+            viewHolder.usernameText.setText("Unknown user");
         }
 
         // Update type icon
-        switch (post.getType()) {
-            case twitter:
-                Picasso.get().load(TWITTER_ICON).into(viewHolder.typeImage);
-            case facebook:
-                Picasso.get().load(FACEBOOK_ICON).into(viewHolder.typeImage);
-            case instagram:
-                Picasso.get().load(INSTAGRAM_ICON).into(viewHolder.typeImage);
+        if (post.getType().equals(Post.socialMediaType.twitter)){
+            Picasso.get().load(TWITTER_ICON).resize(55,55).centerInside().into(viewHolder.typeImage);
+        } else if (post.getType().equals(Post.socialMediaType.instagram)) {
+            Picasso.get().load(INSTAGRAM_ICON).resize(55,55).centerInside().into(viewHolder.typeImage);
+        } else {
+            Picasso.get().load(INSTAGRAM_ICON).resize(55,55).centerInside().into(viewHolder.typeImage);
         }
 
         // update post image
-        if (post.getPostImage().equals(null)){
-            viewHolder.postImage.setVisibility(View.GONE);
+        if (post.getPostImage() != null){
+            Picasso.get().load(post.getPostImage()).resize(400,400).centerInside().into(viewHolder.postImage);
         } else {
-            Picasso.get().load(post.getPostImage()).into(viewHolder.postImage);
+            Picasso.get().load(UNKNOWN_USER_ICON).resize(400,400).centerInside().into(viewHolder.postImage);
+
         }
 
         // update post description
-        if (post.getPostDescription().equals(null)){
-            viewHolder.postText.setVisibility(View.GONE);
-        } else {
+        if (post.getPostDescription() != null){
             viewHolder.postText.setText(post.getPostDescription());
+        } else {
+            viewHolder.postText.setText("No text Available");
         }
 
         return convertView;
@@ -122,11 +124,11 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
         final TextView postText;
 
         ViewHolder(View view) {
-            profileImage = view.findViewById(R.id.profileImage);
-            usernameText = view.findViewById(R.id.userName);
-            typeImage = view.findViewById(R.id.socialMediaImage);
-            postImage = view.findViewById(R.id.postImage);
-            postText = view.findViewById(R.id.postText);
+            profileImage = (ImageView) view.findViewById(R.id.profileImage);
+            usernameText = (TextView) view.findViewById(R.id.userName);
+            typeImage = (ImageView) view.findViewById(R.id.socialMediaImage);
+            postImage = (ImageView) view.findViewById(R.id.postImage);
+            postText = (TextView) view.findViewById(R.id.postText);
         }
 
     }

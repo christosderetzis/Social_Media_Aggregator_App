@@ -1,18 +1,20 @@
 package com.example.socialmediaaggregatorapp.Models;
 
+import androidx.annotation.NonNull;
+
 public class Post {
 
     public enum socialMediaType {
         facebook, instagram, twitter
     };
 
-    private int id;
+    private long id;
     private String postImage;
     private int numberOfLikes;
     private socialMediaType type;
     private String date;
-    private int numberOfComments;
-    private int numberOfRetweets;
+    private Integer numberOfComments;
+    private Integer numberOfRetweets;
     private String username;
     private String profileImage;
     private String postDescription;
@@ -23,11 +25,11 @@ public class Post {
 
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -63,7 +65,7 @@ public class Post {
         this.date = date;
     }
 
-    public int getNumberOfComments() {
+    public Integer getNumberOfComments() {
         return numberOfComments;
     }
 
@@ -71,7 +73,7 @@ public class Post {
         this.numberOfComments = numberOfComments;
     }
 
-    public int getNumberOfRetweets() {
+    public Integer getNumberOfRetweets() {
         return numberOfRetweets;
     }
 
@@ -101,5 +103,21 @@ public class Post {
 
     public void setPostDescription(String postDescription) {
         this.postDescription = postDescription;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", postImage='" + postImage + '\'' +
+                ", numberOfLikes=" + numberOfLikes +
+                ", type=" + type +
+                ", date='" + date + '\'' +
+                ", numberOfComments=" + numberOfComments +
+                ", numberOfRetweets=" + numberOfRetweets +
+                ", username='" + username + '\'' +
+                ", profileImage='" + profileImage + '\'' +
+                ", postDescription='" + postDescription + '\'' +
+                '}';
     }
 }

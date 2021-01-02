@@ -8,10 +8,11 @@
 
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="54dp"
-        android:layout_height="62dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -29,19 +30,21 @@
 
     <ImageView
         android:id="@+id/socialMediaImage"
-        android:layout_width="52dp"
-        android:layout_height="37dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/postImage"
-        android:layout_width="306dp"
-        android:layout_height="259dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_marginTop="24dp"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,9 +53,9 @@
 
     <TextView
         android:id="@+id/postText"
-        android:layout_width="311dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="360dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

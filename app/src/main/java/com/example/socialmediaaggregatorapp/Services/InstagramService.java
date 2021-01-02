@@ -12,11 +12,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class InstagramService {
-    public static final String access_token = "";
+    public static final String access_token = "EAALANmZACq14BAOXJcgKmnV8PR9dQo5RYdUAHICALvuK5LeuBUoSi72Md2V3lUWZBwvXBoL6jAET3k05py66mHHpfALnBJtO8uXHmwysKAcAMVoeIIZCFZCEPhVrC1BCzDfXobxuy3g1vaCnrO1bJw9RuB1kxinl1Rxrxgjg0AH2HHvvp2ZAXy4jUomgY3Ci5poyBjBCcRQZDZD";
 
-    private String instagramIdAccount;
+    private Long instagramIdAccount;
 
-    public InstagramService(String id){
+    public InstagramService(Long id){
         instagramIdAccount = id;
     }
 
@@ -25,9 +25,9 @@ public class InstagramService {
         // check if url has any parameters, in order to add access_token
         String url_parameters = URL.substring(URL.indexOf("?"));
         if (url_parameters.length() == 0){
-            URL += "?access_token" + access_token;
+            URL += "?access_token=" + access_token;
         } else {
-            URL += "&access_token" + access_token;
+            URL += "&access_token=" + access_token;
         }
 
         OkHttpClient client = new OkHttpClient()
@@ -63,7 +63,7 @@ public class InstagramService {
         return paramsMap;
     }
 
-    public String getInstagramIdAccount() {
+    public Long getInstagramIdAccount() {
         return instagramIdAccount;
     }
 }
