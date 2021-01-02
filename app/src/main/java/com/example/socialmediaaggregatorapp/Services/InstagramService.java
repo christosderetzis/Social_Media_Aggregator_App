@@ -12,7 +12,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class InstagramService {
-    public static final String access_token = "EAALANmZACq14BAOXJcgKmnV8PR9dQo5RYdUAHICALvuK5LeuBUoSi72Md2V3lUWZBwvXBoL6jAET3k05py66mHHpfALnBJtO8uXHmwysKAcAMVoeIIZCFZCEPhVrC1BCzDfXobxuy3g1vaCnrO1bJw9RuB1kxinl1Rxrxgjg0AH2HHvvp2ZAXy4jUomgY3Ci5poyBjBCcRQZDZD";
+    public static final String access_token = "";
 
     private Long instagramIdAccount;
 
