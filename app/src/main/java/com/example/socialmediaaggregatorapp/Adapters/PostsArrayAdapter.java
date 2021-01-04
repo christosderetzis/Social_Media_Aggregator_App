@@ -71,7 +71,7 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
         if (post.getProfileImage() != null){
             Picasso.get().load(post.getProfileImage()).into(viewHolder.profileImage);
         } else {
-            Picasso.get().load(UNKNOWN_USER_ICON).into(viewHolder.profileImage);
+            viewHolder.profileImage.setImageResource(R.drawable.unknown_user);
         }
 
         // Update username
@@ -83,18 +83,19 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
 
         // Update type icon
         if (post.getType().equals(Post.socialMediaType.twitter)){
-            Picasso.get().load(TWITTER_ICON).resize(55,55).centerInside().into(viewHolder.typeImage);
+            viewHolder.typeImage.setImageResource(R.drawable.twitter);
         } else if (post.getType().equals(Post.socialMediaType.instagram)) {
-            Picasso.get().load(INSTAGRAM_ICON).resize(55,55).centerInside().into(viewHolder.typeImage);
+            viewHolder.typeImage.setImageResource(R.drawable.instagram);
         } else {
-            Picasso.get().load(INSTAGRAM_ICON).resize(55,55).centerInside().into(viewHolder.typeImage);
+            viewHolder.typeImage.setImageResource(R.drawable.facebook);
         }
 
         // update post image
         if (post.getPostImage() != null){
+            viewHolder.postImage.setVisibility(View.VISIBLE);
             Picasso.get().load(post.getPostImage()).resize(400,400).centerInside().into(viewHolder.postImage);
         } else {
-            Picasso.get().load(UNKNOWN_USER_ICON).resize(400,400).centerInside().into(viewHolder.postImage);
+            viewHolder.postImage.setVisibility(View.GONE);
 
         }
 

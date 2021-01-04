@@ -1,6 +1,10 @@
 package com.example.socialmediaaggregatorapp.Services;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
+
+import com.example.socialmediaaggregatorapp.R;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
