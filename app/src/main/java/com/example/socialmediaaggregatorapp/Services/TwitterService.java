@@ -13,11 +13,15 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.HttpUrl;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class TwitterService {
+
+    MediaType mediaType = MediaType.parse("text/plain");
 
     public static final String Token = "706907411873931264-WOVVPLgbxvU5IL6GtxVRT1WUiVMxy0W";
     public static final String Token_secret = "mNj338uAX1mMCkLJP51d5Gi9ZKIdZXPf3alxyj3B3oSLp";
@@ -30,14 +34,14 @@ public class TwitterService {
         generator = new TwitterOauthHeaderGenerator(Consumer_key, Consumer_key_secret, Token, Token_secret);
     }
 
-    public String downloadTwitterData(String URL) throws IOException {
+    public String handleTwitterData(String URL, String httpMethod) throws IOException {
 
         // get authorization header for request
         Map<String, String> requestParams = getUrlValues(URL);
 
         // divide main url from its parameters
         String url_without_parameters = URL.substring(0, URL.indexOf("?"));
-        String authorization_header = generator.generateHeader("GET", url_without_parameters, requestParams);
+        String authorization_header = generator.generateHeader(httpMethod, url_without_parameters, requestParams);
 
         Log.d("SMA_App", authorization_header);
 
@@ -47,11 +51,21 @@ public class TwitterService {
                 .build();
 
         // Send request data to the twitter server
-        Request request = new Request.Builder()
-                .addHeader("Authorization", authorization_header)
-                .method("GET", null)
-                .url(URL)
-                .build();
+        Request request = null;
+        if (httpMethod == "GET"){
+            request = new Request.Builder()
+                    .addHeader("Authorization", authorization_header)
+                    .method("GET", null)
+                    .url(URL)
+                    .build();
+        } else if (httpMethod == "POST") {
+            RequestBody body = RequestBody.create(mediaType, "");
+            request = new Request.Builder()
+                    .addHeader("Authorization", authorization_header)
+                    .method("POST", body)
+                    .url(URL)
+                    .build();
+        }
 
         // Get the response data
         Response response = client.newCall(request).execute();

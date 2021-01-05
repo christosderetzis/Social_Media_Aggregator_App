@@ -135,7 +135,7 @@ public class GetPostsTask extends AsyncTask<String, Void, List<Post>> {
                 JSONObject tweet_json = tweets.getJSONObject(i);
 
                 // Get id, date of creation and text from tweet
-                int id = tweet_json.getInt(TWITTER_ID);
+                long id = tweet_json.getLong(TWITTER_ID);
                 String dateTime = tweet_json.getString(TWITTER_TIMESTAMP);
                 String tweetText = tweet_json.getString(TWITTER_TEXT);
 
@@ -222,7 +222,7 @@ public class GetPostsTask extends AsyncTask<String, Void, List<Post>> {
         twitter_posts_url = "https://api.twitter.com/1.1/search/tweets.json?q=" + searchHashtag.getQuery();
         String twitter_posts_json = null;
         try {
-            twitter_posts_json = twitterService.downloadTwitterData(twitter_posts_url);
+            twitter_posts_json = twitterService.handleTwitterData(twitter_posts_url, "GET");
         } catch (IOException e) {
             e.printStackTrace();
         }

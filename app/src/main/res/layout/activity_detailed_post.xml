@@ -80,7 +80,7 @@
             android:background="@null"
             app:layout_constraintStart_toStartOf="@+id/dateCreatedText"
             app:layout_constraintTop_toBottomOf="@+id/dateCreatedText"
-            app:srcCompat="@drawable/heart" />
+            app:srcCompat="@null" />
 
         <TextView
             android:id="@+id/likesNumberTxt"
@@ -100,7 +100,7 @@
             android:background="@null"
             app:layout_constraintBottom_toBottomOf="@+id/heartButton"
             app:layout_constraintStart_toEndOf="@+id/likesNumberTxt"
-            app:srcCompat="@drawable/retweet" />
+            app:srcCompat="@null" />
 
         <TextView
             android:id="@+id/retweetsNumberTxt"

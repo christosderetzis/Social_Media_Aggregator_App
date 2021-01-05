@@ -78,7 +78,7 @@ public class GetTrendingHashtagsTask extends AsyncTask<String, Void, List<Hashta
 
         String hashtagJson = null;
         try {
-            hashtagJson = twitterService.downloadTwitterData(url);
+            hashtagJson = twitterService.handleTwitterData(url, "GET");
         } catch (IOException e) {
             e.printStackTrace();
         }

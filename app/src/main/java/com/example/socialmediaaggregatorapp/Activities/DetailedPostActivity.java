@@ -9,8 +9,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.socialmediaaggregatorapp.Adapters.PostsArrayAdapter;
 import com.example.socialmediaaggregatorapp.Models.Post;
 import com.example.socialmediaaggregatorapp.R;
+import com.example.socialmediaaggregatorapp.Tasks.PostTwitterData;
 import com.squareup.picasso.Picasso;
 
 public class DetailedPostActivity extends AppCompatActivity {
@@ -27,6 +29,11 @@ public class DetailedPostActivity extends AppCompatActivity {
     private TextView numberOfRetweets;
     private ImageButton commentButton;
     private TextView numberOfComments;
+
+    private String url_like;
+    private String url_unlike;
+    private String url_retweet;
+    private String url_unretweet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,13 @@ public class DetailedPostActivity extends AppCompatActivity {
         // Get intent from PostsActivity
         Intent intent = getIntent();
         Post post = (Post) intent.getSerializableExtra("post");
+
+        // initialize urls based on post
+        long tweet_id = post.getId();
+        url_like = "https://api.twitter.com/1.1/favorites/create.json?id=" + tweet_id;
+        url_unlike = "https://api.twitter.com/1.1/favorites/destroy.json?id=" + tweet_id;
+        url_retweet = "https://api.twitter.com/1.1/statuses/retweet/" + tweet_id + ".json";
+        url_unretweet = "https://api.twitter.com/1.1/statuses/unretweet/" + tweet_id + ".json";
 
         // Update data to post elements
 
@@ -94,12 +108,34 @@ public class DetailedPostActivity extends AppCompatActivity {
         // Update post dateTime
         postDateTime.setText(post.getDate());
 
+        // update icons based on the social media type
         if (post.getType().equals(Post.socialMediaType.twitter)) {
             if (post.isFavorited()) {
                 heartButton.setImageResource(R.drawable.heart_filled);
             } else {
                 heartButton.setImageResource(R.drawable.heart);
             }
+            heartButton.setOnClickListener(new View.OnClickListener() {
+                PostTwitterData postTwitterData = new PostTwitterData();
+                String url;
+                @Override
+                public void onClick(View view) {
+                    if (!post.isFavorited()){
+                        heartButton.setImageResource(R.drawable.heart_filled);
+                        url = url_like;
+                        numberOfLikes.setText((post.getNumberOfLikes() + 1) + " likes");
+                        post.setFavorited(true);
+                        post.setNumberOfLikes(post.getNumberOfLikes() + 1);
+                    } else {
+                        heartButton.setImageResource(R.drawable.heart);
+                        url = url_unlike;
+                        numberOfLikes.setText((post.getNumberOfLikes() - 1) + " likes");
+                        post.setFavorited(false);
+                        post.setNumberOfLikes(post.getNumberOfLikes() - 1);
+                    }
+                    postTwitterData.execute(url);
+                }
+            });
             numberOfLikes.setText(post.getNumberOfLikes() + " likes");
 
             retweetButton.setVisibility(View.VISIBLE);
@@ -115,6 +151,7 @@ public class DetailedPostActivity extends AppCompatActivity {
             numberOfComments.setVisibility(View.GONE);
         } else if (post.getType().equals(Post.socialMediaType.instagram)) {
             heartButton.setImageResource(R.drawable.heart);
+            numberOfLikes.setText(post.getNumberOfLikes() + " likes");
 
             retweetButton.setVisibility(View.GONE);
             numberOfRetweets.setVisibility(View.GONE);
@@ -123,6 +160,4 @@ public class DetailedPostActivity extends AppCompatActivity {
             numberOfComments.setText(post.getNumberOfComments() + " comments");
         }
     }
-
-
 }

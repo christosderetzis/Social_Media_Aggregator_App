@@ -89,7 +89,7 @@ public class SearchHashtagsTask extends AsyncTask<String, Void, List<Hashtag>> {
 
         String searchDataJson = null;
         try {
-            searchDataJson = twitterService.downloadTwitterData(search_url);
+            searchDataJson = twitterService.handleTwitterData(search_url, "GET");
         } catch (IOException e) {
             e.printStackTrace();
         }
