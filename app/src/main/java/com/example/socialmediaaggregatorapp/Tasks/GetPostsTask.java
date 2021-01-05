@@ -41,6 +41,8 @@ public class GetPostsTask extends AsyncTask<String, Void, List<Post>> {
     public static final String TWITTER_USER_IMAGE = "profile_image_url_https";
     public static final String TWITTER_LIKES = "favorite_count";
     public static final String TWITTER_RETWEETS = "retweet_count";
+    public static final String TWITTER_FAVORITED = "favorited";
+    public static final String TWITTER_RETWEETED = "retweeted";
 
     private Hashtag searchHashtag;
     private PostsArrayAdapter postsArrayAdapter;
@@ -106,6 +108,8 @@ public class GetPostsTask extends AsyncTask<String, Void, List<Post>> {
                     post.setPostDescription(null);
                     post.setProfileImage(null);
                     post.setUsername(null);
+                    post.setFavorited(false);
+                    post.setRetweeted(false);
 
                     instagram_posts.add(post);
                 }
@@ -157,6 +161,8 @@ public class GetPostsTask extends AsyncTask<String, Void, List<Post>> {
                 // Get followers and retweets of tweet
                 int numberOfLikes = tweet_json.getInt(TWITTER_LIKES);
                 int numberOfRetweets = tweet_json.getInt(TWITTER_RETWEETS);
+                boolean favorited = tweet_json.getBoolean(TWITTER_FAVORITED);
+                boolean retweeted = tweet_json.getBoolean(TWITTER_RETWEETED);
 
                 // Build post object and add it to the list
                 Post post = new Post();
@@ -171,6 +177,8 @@ public class GetPostsTask extends AsyncTask<String, Void, List<Post>> {
                 post.setNumberOfLikes(numberOfLikes);
                 post.setNumberOfRetweets(numberOfRetweets);
                 post.setNumberOfComments(null);
+                post.setFavorited(favorited);
+                post.setRetweeted(retweeted);
 
                 twitter_posts.add(post);
 
