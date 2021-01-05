@@ -69,7 +69,7 @@ public class DetailedPostActivity extends AppCompatActivity {
         // update post image
         if (post.getPostImage() != null){
             postImage.setVisibility(View.VISIBLE);
-            Picasso.get().load(post.getPostImage()).resize(400,400).centerInside().into(postImage);
+            Picasso.get().load(post.getPostImage()).resize(300,300).centerInside().into(postImage);
         } else {
             postImage.setVisibility(View.GONE);
         }

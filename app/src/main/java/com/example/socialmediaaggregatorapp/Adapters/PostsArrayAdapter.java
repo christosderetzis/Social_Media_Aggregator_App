@@ -93,7 +93,7 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
         // update post image
         if (post.getPostImage() != null){
             viewHolder.postImage.setVisibility(View.VISIBLE);
-            Picasso.get().load(post.getPostImage()).resize(400,400).centerInside().into(viewHolder.postImage);
+            Picasso.get().load(post.getPostImage()).resize(200,200).centerInside().into(viewHolder.postImage);
         } else {
             viewHolder.postImage.setVisibility(View.GONE);
 
