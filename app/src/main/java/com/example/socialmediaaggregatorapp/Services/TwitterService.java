@@ -40,7 +40,11 @@ public class TwitterService {
         Map<String, String> requestParams = getUrlValues(URL);
 
         // divide main url from its parameters
-        String url_without_parameters = URL.substring(0, URL.indexOf("?"));
+        String url_without_parameters = URL;
+        if (URL.contains("?")) {
+            url_without_parameters = URL.substring(0, URL.indexOf("?"));
+        }
+
         String authorization_header = generator.generateHeader(httpMethod, url_without_parameters, requestParams);
 
         Log.d("SMA_App", authorization_header);

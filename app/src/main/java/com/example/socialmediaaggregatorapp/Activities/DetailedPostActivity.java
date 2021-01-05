@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.socialmediaaggregatorapp.Adapters.PostsArrayAdapter;
 import com.example.socialmediaaggregatorapp.Models.Post;
@@ -116,7 +117,6 @@ public class DetailedPostActivity extends AppCompatActivity {
                 heartButton.setImageResource(R.drawable.heart);
             }
             heartButton.setOnClickListener(new View.OnClickListener() {
-                PostTwitterData postTwitterData = new PostTwitterData();
                 String url;
                 @Override
                 public void onClick(View view) {
@@ -133,7 +133,7 @@ public class DetailedPostActivity extends AppCompatActivity {
                         post.setFavorited(false);
                         post.setNumberOfLikes(post.getNumberOfLikes() - 1);
                     }
-                    postTwitterData.execute(url);
+                    new PostTwitterData().execute(url);
                 }
             });
             numberOfLikes.setText(post.getNumberOfLikes() + " likes");
@@ -144,6 +144,26 @@ public class DetailedPostActivity extends AppCompatActivity {
             } else {
                 retweetButton.setImageResource(R.drawable.retweet);
             }
+            retweetButton.setOnClickListener(new View.OnClickListener() {
+                String url;
+                @Override
+                public void onClick(View view) {
+                    if (!post.isRetweeted()){
+                        retweetButton.setImageResource(R.drawable.retweet_filled);
+                        url = url_retweet;
+                        numberOfRetweets.setText((post.getNumberOfRetweets() + 1) + " retweets");
+                        post.setRetweeted(true);
+                        post.setNumberOfRetweets(post.getNumberOfRetweets() + 1);
+                    } else {
+                        retweetButton.setImageResource(R.drawable.retweet);
+                        url = url_unretweet;
+                        numberOfRetweets.setText((post.getNumberOfRetweets() - 1) + " retweets");
+                        post.setRetweeted(false);
+                        post.setNumberOfRetweets(post.getNumberOfRetweets() - 1);
+                    }
+                    new PostTwitterData().execute(url);
+                }
+            });
             numberOfRetweets.setVisibility(View.VISIBLE);
             numberOfRetweets.setText(post.getNumberOfRetweets() + " retweets");
 
@@ -151,12 +171,24 @@ public class DetailedPostActivity extends AppCompatActivity {
             numberOfComments.setVisibility(View.GONE);
         } else if (post.getType().equals(Post.socialMediaType.instagram)) {
             heartButton.setImageResource(R.drawable.heart);
+            heartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(DetailedPostActivity.this, "The like post is not supported by app", Toast.LENGTH_LONG);
+                }
+            });
             numberOfLikes.setText(post.getNumberOfLikes() + " likes");
 
             retweetButton.setVisibility(View.GONE);
             numberOfRetweets.setVisibility(View.GONE);
 
             commentButton.setVisibility(View.VISIBLE);
+            commentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(DetailedPostActivity.this, "The comment post is not supported by app", Toast.LENGTH_LONG);
+                }
+            });
             numberOfComments.setText(post.getNumberOfComments() + " comments");
         }
     }
