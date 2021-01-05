@@ -2,7 +2,9 @@ package com.example.socialmediaaggregatorapp.Models;
 
 import androidx.annotation.NonNull;
 
-public class Post {
+import java.io.Serializable;
+
+public class Post implements Serializable {
 
     public enum socialMediaType {
         facebook, instagram, twitter

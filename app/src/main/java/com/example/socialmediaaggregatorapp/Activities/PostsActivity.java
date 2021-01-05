@@ -47,8 +47,10 @@ public class PostsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Post post = (Post) adapterView.getItemAtPosition(i);
 
-                Log.d("SMA_APP", "New hashtag");
-                Log.d("SMA_APP", post.toString());
+                Intent intent = new Intent(PostsActivity.this, DetailedPostActivity.class);
+                intent.putExtra("post", post);
+
+                startActivity(intent);
             }
         });
 

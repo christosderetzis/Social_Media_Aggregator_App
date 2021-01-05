@@ -101,9 +101,10 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
 
         // update post description
         if (post.getPostDescription() != null){
+            viewHolder.postText.setVisibility(View.VISIBLE);
             viewHolder.postText.setText(post.getPostDescription());
         } else {
-            viewHolder.postText.setText("No text Available");
+            viewHolder.postText.setVisibility(View.GONE);
         }
 
         return convertView;
