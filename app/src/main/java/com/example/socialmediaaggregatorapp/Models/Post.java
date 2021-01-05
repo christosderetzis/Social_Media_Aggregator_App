@@ -20,6 +20,8 @@ public class Post implements Serializable {
     private String username;
     private String profileImage;
     private String postDescription;
+    private boolean favorited;
+    private boolean retweeted;
 
     public Post() {
 
@@ -105,6 +107,22 @@ public class Post implements Serializable {
 
     public void setPostDescription(String postDescription) {
         this.postDescription = postDescription;
+    }
+
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
+
+    public boolean isRetweeted() {
+        return retweeted;
+    }
+
+    public void setRetweeted(boolean retweeted) {
+        this.retweeted = retweeted;
     }
 
     @Override

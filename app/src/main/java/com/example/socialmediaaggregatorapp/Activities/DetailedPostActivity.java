@@ -5,16 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.socialmediaaggregatorapp.Models.Post;
 import com.example.socialmediaaggregatorapp.R;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.time.format.DateTimeFormatter;
 
 public class DetailedPostActivity extends AppCompatActivity {
 
@@ -24,6 +21,12 @@ public class DetailedPostActivity extends AppCompatActivity {
     private ImageView postImage;
     private TextView postDescription;
     private TextView postDateTime;
+    private ImageButton heartButton;
+    private TextView numberOfLikes;
+    private ImageButton retweetButton;
+    private TextView numberOfRetweets;
+    private ImageButton commentButton;
+    private TextView numberOfComments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,12 @@ public class DetailedPostActivity extends AppCompatActivity {
         postImage = (ImageView) findViewById(R.id.postImage);
         postDescription = (TextView) findViewById(R.id.postText);
         postDateTime = (TextView) findViewById(R.id.dateCreatedText);
+        heartButton = (ImageButton) findViewById(R.id.heartButton);
+        numberOfLikes = (TextView) findViewById(R.id.likesNumberTxt);
+        retweetButton = (ImageButton) findViewById(R.id.retweetButton);
+        numberOfRetweets = (TextView) findViewById(R.id.retweetsNumberTxt);
+        commentButton = (ImageButton) findViewById(R.id.commentButton);
+        numberOfComments = (TextView) findViewById(R.id.commentsNumberTxt);
 
         // Get intent from PostsActivity
         Intent intent = getIntent();
@@ -84,6 +93,35 @@ public class DetailedPostActivity extends AppCompatActivity {
 
         // Update post dateTime
         postDateTime.setText(post.getDate());
+
+        if (post.getType().equals(Post.socialMediaType.twitter)) {
+            if (post.isFavorited()) {
+                heartButton.setImageResource(R.drawable.heart_filled);
+            } else {
+                heartButton.setImageResource(R.drawable.heart);
+            }
+            numberOfLikes.setText(post.getNumberOfLikes() + " likes");
+
+            retweetButton.setVisibility(View.VISIBLE);
+            if (post.isRetweeted()){
+                retweetButton.setImageResource(R.drawable.retweet_filled);
+            } else {
+                retweetButton.setImageResource(R.drawable.retweet);
+            }
+            numberOfRetweets.setVisibility(View.VISIBLE);
+            numberOfRetweets.setText(post.getNumberOfRetweets() + " retweets");
+
+            commentButton.setVisibility(View.GONE);
+            numberOfComments.setVisibility(View.GONE);
+        } else if (post.getType().equals(Post.socialMediaType.instagram)) {
+            heartButton.setImageResource(R.drawable.heart);
+
+            retweetButton.setVisibility(View.GONE);
+            numberOfRetweets.setVisibility(View.GONE);
+
+            commentButton.setVisibility(View.VISIBLE);
+            numberOfComments.setText(post.getNumberOfComments() + " comments");
+        }
     }
 
 
