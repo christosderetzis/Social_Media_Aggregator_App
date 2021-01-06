@@ -17,6 +17,7 @@ import com.example.socialmediaaggregatorapp.Models.Post;
 import com.example.socialmediaaggregatorapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class PostsArrayAdapter extends ArrayAdapter<Post> {
@@ -116,6 +117,15 @@ public class PostsArrayAdapter extends ArrayAdapter<Post> {
         }
         this.postsList = posts;
         postsListView.setAdapter(this);
+    }
+
+    public void updatePosts(Post updatedPost) {
+        for (Post post: this.postsList){
+            if (post.getId() == updatedPost.getId()){
+                int post_position = this.postsList.indexOf(post);
+                this.postsList.set(post_position, updatedPost);
+            }
+        }
     }
 
     private class ViewHolder {

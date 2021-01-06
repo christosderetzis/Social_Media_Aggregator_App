@@ -124,16 +124,12 @@ public class DetailedPostActivity extends AppCompatActivity {
                         heartButton.setImageResource(R.drawable.heart_filled);
                         url = url_like;
                         numberOfLikes.setText((post.getNumberOfLikes() + 1) + " likes");
-                        post.setFavorited(true);
-                        post.setNumberOfLikes(post.getNumberOfLikes() + 1);
                     } else {
                         heartButton.setImageResource(R.drawable.heart);
                         url = url_unlike;
                         numberOfLikes.setText((post.getNumberOfLikes() - 1) + " likes");
-                        post.setFavorited(false);
-                        post.setNumberOfLikes(post.getNumberOfLikes() - 1);
                     }
-                    new PostTwitterData().execute(url);
+                    new PostTwitterData(PostsActivity.postsArrayAdapter).execute(url);
                 }
             });
             numberOfLikes.setText(post.getNumberOfLikes() + " likes");
@@ -152,16 +148,12 @@ public class DetailedPostActivity extends AppCompatActivity {
                         retweetButton.setImageResource(R.drawable.retweet_filled);
                         url = url_retweet;
                         numberOfRetweets.setText((post.getNumberOfRetweets() + 1) + " retweets");
-                        post.setRetweeted(true);
-                        post.setNumberOfRetweets(post.getNumberOfRetweets() + 1);
                     } else {
                         retweetButton.setImageResource(R.drawable.retweet);
                         url = url_unretweet;
                         numberOfRetweets.setText((post.getNumberOfRetweets() - 1) + " retweets");
-                        post.setRetweeted(false);
-                        post.setNumberOfRetweets(post.getNumberOfRetweets() - 1);
                     }
-                    new PostTwitterData().execute(url);
+                    new PostTwitterData(PostsActivity.postsArrayAdapter).execute(url);
                 }
             });
             numberOfRetweets.setVisibility(View.VISIBLE);

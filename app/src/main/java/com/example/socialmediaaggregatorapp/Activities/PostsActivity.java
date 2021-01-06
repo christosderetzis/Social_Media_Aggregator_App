@@ -17,14 +17,15 @@ import com.example.socialmediaaggregatorapp.Models.Post;
 import com.example.socialmediaaggregatorapp.R;
 import com.example.socialmediaaggregatorapp.Tasks.GetPostsTask;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PostsActivity extends AppCompatActivity {
+public class PostsActivity extends AppCompatActivity{
 
     private TextView postsTitle;
     private ListView postsListView;
 
-    private PostsArrayAdapter postsArrayAdapter;
+    public static PostsArrayAdapter postsArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
