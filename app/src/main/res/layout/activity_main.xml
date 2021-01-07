@@ -46,4 +46,13 @@
         android:text="Search"
         app:layout_constraintStart_toEndOf="@+id/hashtagSearchTxt"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.example.socialmediaaggregatorapp.Fragments.BottomNavigationFragment"
+        android:layout_width="419dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

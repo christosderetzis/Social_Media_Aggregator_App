@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMediaAggregatorApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.DetailedPostActivity"></activity>
+        <activity android:name=".Activities.CreateStoryActivity"></activity>
+        <activity android:name=".Activities.CreatePostActivity" />
+        <activity android:name=".Activities.DetailedPostActivity" />
         <activity android:name=".Activities.PostsActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
