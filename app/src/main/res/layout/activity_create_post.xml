@@ -6,4 +6,121 @@
     android:layout_height="match_parent"
     tools:context=".Activities.CreatePostActivity">
 
+    <TextView
+        android:id="@+id/CreatePostTitleId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Create A Post"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pickPhotoBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Pick a photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CreatePostTitleId" />
+
+    <EditText
+        android:id="@+id/postText"
+        android:layout_width="305dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postImage" />
+
+    <ImageView
+        android:id="@+id/postImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pickPhotoBtn"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <CheckBox
+        android:id="@+id/facebookCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="40dp"
+        android:text="Facebook"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postText" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="62dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/facebookCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/facebookCheckBox"
+        app:srcCompat="@drawable/facebook" />
+
+    <CheckBox
+        android:id="@+id/instagramCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Instagram"
+        app:layout_constraintStart_toStartOf="@+id/facebookCheckBox"
+        app:layout_constraintTop_toBottomOf="@+id/facebookCheckBox" />
+
+    <CheckBox
+        android:id="@+id/twitterCheckBox"
+        android:layout_width="95dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:text="Twitter"
+        app:layout_constraintStart_toStartOf="@+id/instagramCheckBox"
+        app:layout_constraintTop_toBottomOf="@+id/instagramCheckBox" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="60dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/instagramCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/instagramCheckBox"
+        app:srcCompat="@drawable/instagram" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="57dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/twitterCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/twitterCheckBox"
+        app:srcCompat="@drawable/twitter" />
+
+    <Button
+        android:id="@+id/UploadPostBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Upload Post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twitterCheckBox" />
+
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="com.example.socialmediaaggregatorapp.Fragments.BottomNavigationFragment"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
