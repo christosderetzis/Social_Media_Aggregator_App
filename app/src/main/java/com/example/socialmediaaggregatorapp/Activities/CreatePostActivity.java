@@ -10,9 +10,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +26,10 @@ import android.widget.Toast;
 
 import com.example.socialmediaaggregatorapp.R;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URI;
 
 public class CreatePostActivity extends AppCompatActivity {
@@ -35,11 +42,14 @@ public class CreatePostActivity extends AppCompatActivity {
     private CheckBox twitterCheckBox;
     private CheckBox instagramCheckBox;
 
+    private Uri imageURI;
+    private InputStream imageStream;
+    private Bitmap selectedImageBitmap;
+    private String encodedImage;
+
     public static final String TAG = "SMA_APP";
     public static final int REQUEST_CODE_READ_IMAGE = 1;
     public static boolean READ_IMAGE_GRANTED = false;
-
-    private Uri imageURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,40 +92,26 @@ public class CreatePostActivity extends AppCompatActivity {
 
     }
 
-    private void checkPermissions() {
-        int hasReadImagePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-
-
-        if(hasReadImagePermission == PackageManager.PERMISSION_GRANTED){
-            Log.d(TAG, "Permission Granted");
-            READ_IMAGE_GRANTED = true;
-        }
-        else{
-            Log.d(TAG, "Requesting permission");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_IMAGE);
-        }
-    }
-
-    private void pickImageFromResources() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_READ_IMAGE);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_READ_IMAGE && resultCode == Activity.RESULT_OK){
-            imagePost.setVisibility(View.VISIBLE);
-            imagePickerBtn.setVisibility(View.GONE);
+        try {
+            if (requestCode == REQUEST_CODE_READ_IMAGE && resultCode == Activity.RESULT_OK){
+                imagePost.setVisibility(View.VISIBLE);
 
-            imageURI = data.getData();
-            imagePost.setImageURI(imageURI);
+                imageURI = data.getData();
+                imageStream = getContentResolver().openInputStream(imageURI);
+                selectedImageBitmap = BitmapFactory.decodeStream(imageStream);
+                encodedImage = encodeImage(selectedImageBitmap);
 
-        } else {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+                imagePost.setImageBitmap(selectedImageBitmap);
+                Log.d(TAG, "Endoencoded image is: " + encodedImage);
+            } else {
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e){
+            Log.d(TAG, "Exception in file image: " + e.toString());
         }
     }
 
@@ -137,6 +133,36 @@ public class CreatePostActivity extends AppCompatActivity {
                 }
                 return;
         }
+    }
+
+    private void checkPermissions() {
+        int hasReadImagePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+
+
+        if(hasReadImagePermission == PackageManager.PERMISSION_GRANTED){
+            Log.d(TAG, "Permission Granted");
+            READ_IMAGE_GRANTED = true;
+        }
+        else{
+            Log.d(TAG, "Requesting permission");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_IMAGE);
+        }
+    }
+
+    private void pickImageFromResources() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_READ_IMAGE);
+    }
+
+    private String encodeImage(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] b = byteArrayOutputStream.toByteArray();
+        String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return encodedImage;
     }
 
     private class UploadPostTask extends AsyncTask<String, Void, Void> {
