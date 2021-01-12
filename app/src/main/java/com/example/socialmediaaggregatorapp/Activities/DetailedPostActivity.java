@@ -166,7 +166,7 @@ public class DetailedPostActivity extends AppCompatActivity {
             heartButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(DetailedPostActivity.this, "The like post is not supported by app", Toast.LENGTH_LONG);
+                    Toast.makeText(DetailedPostActivity.this, "The like post is not supported by app", Toast.LENGTH_LONG).show();
                 }
             });
             numberOfLikes.setText(post.getNumberOfLikes() + " likes");
@@ -178,7 +178,7 @@ public class DetailedPostActivity extends AppCompatActivity {
             commentButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(DetailedPostActivity.this, "The comment post is not supported by app", Toast.LENGTH_LONG);
+                    Toast.makeText(DetailedPostActivity.this, "The comment post is not supported by app", Toast.LENGTH_LONG).show();
                 }
             });
             numberOfComments.setText(post.getNumberOfComments() + " comments");
