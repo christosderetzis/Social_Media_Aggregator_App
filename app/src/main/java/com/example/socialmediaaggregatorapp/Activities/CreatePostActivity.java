@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.example.socialmediaaggregatorapp.Tasks.PostTwitterData;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
@@ -47,7 +49,7 @@ public class CreatePostActivity extends AppCompatActivity {
     private Uri imageURI;
     private InputStream imageStream;
     private Bitmap selectedImageBitmap;
-    private String encodedImage;
+    private ByteArrayInputStream encodedImage;
     private String text;
 
     public static final String TAG = "SMA_APP";
@@ -77,9 +79,8 @@ public class CreatePostActivity extends AppCompatActivity {
             pickImageFromResources();
         });
 
-        text = textPost.getText().toString();
-
         uploadPostBtn.setOnClickListener((listener) -> {
+            text = textPost.getText().toString();
             if (facebookCheckBox.isChecked()){
 
             }
@@ -97,10 +98,10 @@ public class CreatePostActivity extends AppCompatActivity {
 
     private void postToTwitter() {
         if (selectedImageBitmap != null || text != null){
-            CreateTwitterPost createTwitterPost = new CreateTwitterPost(encodedImage, text);
+            CreateTwitterPost createTwitterPost = new CreateTwitterPost(this, encodedImage, text);
             createTwitterPost.execute();
         } else {
-            Toast.makeText(this, "Please, provide a text or an image for the tweet post", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please, provide a text or an image for the twitter post", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -118,7 +119,7 @@ public class CreatePostActivity extends AppCompatActivity {
                 encodedImage = encodeImage(selectedImageBitmap);
 
                 imagePost.setImageBitmap(selectedImageBitmap);
-                Log.d(TAG, "Endoencoded image is: " + encodedImage);
+                Log.d(TAG, "Encoded image is: " + encodedImage);
             } else {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
@@ -168,13 +169,13 @@ public class CreatePostActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_READ_IMAGE);
     }
 
-    private String encodeImage(Bitmap bitmap){
+    private ByteArrayInputStream encodeImage(Bitmap bitmap){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] b = byteArrayOutputStream.toByteArray();
-        String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(b);
 
-        return encodedImage;
+        return byteArrayInputStream;
     }
 
     private class UploadPostTask extends AsyncTask<String, Void, Void> {

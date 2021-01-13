@@ -1,67 +1,71 @@
 package com.example.socialmediaaggregatorapp.Tasks;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.example.socialmediaaggregatorapp.Activities.CreatePostActivity;
+import com.example.socialmediaaggregatorapp.R;
 import com.example.socialmediaaggregatorapp.Services.TwitterService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class CreateTwitterPost extends AsyncTask <String, Void, String>{
+import twitter4j.StatusUpdate;
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
 
-    public static final String TAG = "SMA_APP";
-    public static final String MEDIA_ID = "media_id";
+public class CreateTwitterPost extends AsyncTask<String, Void, String> {
+    private ConfigurationBuilder configurationBuilder;
+    private Configuration configuration;
+    private Twitter twitter;
+    private StatusUpdate status;
 
-    private String image;
+    private Context context;
+    private ByteArrayInputStream image;
     private String text;
-    private TwitterService twitterService;
 
-    public CreateTwitterPost(String imageToUpload, String textToUpload) {
-        image = imageToUpload;
-        text = textToUpload;
-        twitterService = new TwitterService();
+    public CreateTwitterPost(Context context, ByteArrayInputStream image, String text) {
+        // Setup twitter4j connection
+        configurationBuilder = new ConfigurationBuilder()
+                .setDebugEnabled(true)
+                .setOAuthConsumerKey(context.getResources().getString(R.string.API_key))
+                .setOAuthConsumerSecret(context.getResources().getString(R.string.API_key_secret))
+                .setOAuthAccessToken(context.getResources().getString(R.string.Access_token))
+                .setOAuthAccessTokenSecret(context.getResources().getString(R.string.Access_token_secret));
+        configuration = configurationBuilder.build();
+        twitter = new TwitterFactory(configuration).getInstance();
+
+        this.context = context;
+        this.image = image;
+        this.text = text;
     }
-
-    private long getMediaId(String json_data) {
-        long media_id = 0;
+    @Override
+    protected String doInBackground(String... strings) {
+        status = new StatusUpdate(text);
+        if (image != null){
+            status.setMedia("image", image);
+        }
         try {
-            JSONObject object = new JSONObject(json_data);
-            media_id = object.getLong(MEDIA_ID);
-        } catch (JSONException e){
+            twitter.updateStatus(status);
+        } catch (twitter4j.TwitterException e) {
             e.printStackTrace();
         }
-        return media_id;
-    }
 
-    @Override
-    protected String  doInBackground(String... strings) {
-        if (image != null){
-            String initial_image_upload = "https://upload.twitter.com/1.1/media/upload.json?media=" + image;
-            String dataJSON = null;
-            try {
-                dataJSON = twitterService.handleTwitterData(initial_image_upload, "POST", false);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            long media_id = getMediaId(dataJSON);
-            Log.d(TAG, "Data id is: " + dataJSON);
-
-        } else {
-
-        }
-
-        return "yes";
+        return "Complete";
     }
 
     @Override
     protected void onPostExecute(String s) {
-        String result = s;
+        Toast.makeText(context, "Tweet was uploaded successfully", Toast.LENGTH_LONG).show();
     }
 }
