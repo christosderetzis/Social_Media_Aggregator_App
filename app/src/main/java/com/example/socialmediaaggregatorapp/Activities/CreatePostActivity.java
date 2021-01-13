@@ -25,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.socialmediaaggregatorapp.R;
+import com.example.socialmediaaggregatorapp.Tasks.CreateTwitterPost;
+import com.example.socialmediaaggregatorapp.Tasks.PostTwitterData;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -46,6 +48,7 @@ public class CreatePostActivity extends AppCompatActivity {
     private InputStream imageStream;
     private Bitmap selectedImageBitmap;
     private String encodedImage;
+    private String text;
 
     public static final String TAG = "SMA_APP";
     public static final int REQUEST_CODE_READ_IMAGE = 1;
@@ -74,7 +77,7 @@ public class CreatePostActivity extends AppCompatActivity {
             pickImageFromResources();
         });
 
-        String text = textPost.getText().toString();
+        text = textPost.getText().toString();
 
         uploadPostBtn.setOnClickListener((listener) -> {
             if (facebookCheckBox.isChecked()){
@@ -82,7 +85,7 @@ public class CreatePostActivity extends AppCompatActivity {
             }
 
             if (twitterCheckBox.isChecked()){
-
+                postToTwitter();
             }
 
             if (instagramCheckBox.isChecked()){
@@ -90,6 +93,15 @@ public class CreatePostActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void postToTwitter() {
+        if (selectedImageBitmap != null || text != null){
+            CreateTwitterPost createTwitterPost = new CreateTwitterPost(encodedImage, text);
+            createTwitterPost.execute();
+        } else {
+            Toast.makeText(this, "Please, provide a text or an image for the tweet post", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

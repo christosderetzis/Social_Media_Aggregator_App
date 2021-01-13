@@ -96,6 +96,7 @@ public class TwitterOauthHeaderGenerator {
         put(params, oauth_timestamp, timestamp);
         put(params, oauth_token, token);
         put(params, oauth_version, version);
+        String  baseString;
         Map<String, String> sortedParams = params.entrySet().stream().sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
         StringBuilder base = new StringBuilder();
@@ -103,7 +104,7 @@ public class TwitterOauthHeaderGenerator {
             base.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
         });
         base.deleteCharAt(base.length() - 1);
-        String baseString = httpMethod.toUpperCase() + "&" + encode(url) + "&" + encode(base.toString());
+        baseString = httpMethod.toUpperCase() + "&" + encode(url) + "&" + encode(base.toString());
         return baseString;
     }
 

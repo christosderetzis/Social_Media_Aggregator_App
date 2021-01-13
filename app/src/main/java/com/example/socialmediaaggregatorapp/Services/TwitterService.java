@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class TwitterService {
 
-    MediaType mediaType = MediaType.parse("text/plain");
+    private MediaType mediaType = null;
 
     public static final String Token = "706907411873931264-WOVVPLgbxvU5IL6GtxVRT1WUiVMxy0W";
     public static final String Token_secret = "mNj338uAX1mMCkLJP51d5Gi9ZKIdZXPf3alxyj3B3oSLp";
@@ -35,6 +35,7 @@ public class TwitterService {
     }
 
     public String handleTwitterData(String URL, String httpMethod) throws IOException {
+        mediaType = MediaType.parse("text/plain");
 
         // get authorization header for request
         Map<String, String> requestParams = getUrlValues(URL);
