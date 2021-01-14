@@ -38,10 +38,10 @@ public class CreateTwitterPost extends AsyncTask<String, Void, String> {
         // Setup twitter4j connection
         configurationBuilder = new ConfigurationBuilder()
                 .setDebugEnabled(true)
-                .setOAuthConsumerKey(context.getResources().getString(R.string.API_key))
-                .setOAuthConsumerSecret(context.getResources().getString(R.string.API_key_secret))
-                .setOAuthAccessToken(context.getResources().getString(R.string.Access_token))
-                .setOAuthAccessTokenSecret(context.getResources().getString(R.string.Access_token_secret));
+                .setOAuthConsumerKey(context.getResources().getString(R.string.twitter_API_key))
+                .setOAuthConsumerSecret(context.getResources().getString(R.string.twitter_API_key_secret))
+                .setOAuthAccessToken(context.getResources().getString(R.string.twitter_Access_token))
+                .setOAuthAccessTokenSecret(context.getResources().getString(R.string.twitter_Access_token_secret));
         configuration = configurationBuilder.build();
         twitter = new TwitterFactory(configuration).getInstance();
 

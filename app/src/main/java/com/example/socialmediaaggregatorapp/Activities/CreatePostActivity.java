@@ -13,10 +13,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,14 +24,13 @@ import android.widget.Toast;
 
 import com.example.socialmediaaggregatorapp.R;
 import com.example.socialmediaaggregatorapp.Tasks.CreateTwitterPost;
-import com.example.socialmediaaggregatorapp.Tasks.PostTwitterData;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.URI;
 
 public class CreatePostActivity extends AppCompatActivity {
 
@@ -49,8 +45,11 @@ public class CreatePostActivity extends AppCompatActivity {
     private Uri imageURI;
     private InputStream imageStream;
     private Bitmap selectedImageBitmap;
-    private ByteArrayInputStream encodedImage;
+    private ByteArrayInputStream encodedImageBAOS;
+
     private String text;
+
+    private ShareDialog shareDialog;
 
     public static final String TAG = "SMA_APP";
     public static final int REQUEST_CODE_READ_IMAGE = 1;
@@ -73,6 +72,8 @@ public class CreatePostActivity extends AppCompatActivity {
         imagePost.setVisibility(View.GONE);
         imagePickerBtn.setVisibility(View.VISIBLE);
 
+        shareDialog = new ShareDialog(this);
+
         imagePickerBtn.setOnClickListener((listener) -> {
             checkPermissions();
 
@@ -82,7 +83,7 @@ public class CreatePostActivity extends AppCompatActivity {
         uploadPostBtn.setOnClickListener((listener) -> {
             text = textPost.getText().toString();
             if (facebookCheckBox.isChecked()){
-
+                postToFacebook();
             }
 
             if (twitterCheckBox.isChecked()){
@@ -90,18 +91,46 @@ public class CreatePostActivity extends AppCompatActivity {
             }
 
             if (instagramCheckBox.isChecked()){
-
+                postToInstagram();
             }
         });
 
     }
 
+    private void postToFacebook() {
+        if (selectedImageBitmap != null){
+            SharePhoto photo = new SharePhoto.Builder()
+                    .setBitmap(selectedImageBitmap)
+                    .build();
+            SharePhotoContent content = new SharePhotoContent.Builder()
+                    .addPhoto(photo)
+                    .build();
+
+            shareDialog.show(content);
+
+        }
+    }
+
+
     private void postToTwitter() {
         if (selectedImageBitmap != null || text != null){
-            CreateTwitterPost createTwitterPost = new CreateTwitterPost(this, encodedImage, text);
+            CreateTwitterPost createTwitterPost = new CreateTwitterPost(this, encodedImageBAOS, text);
             createTwitterPost.execute();
         } else {
             Toast.makeText(this, "Please, provide a text or an image for the twitter post", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void postToInstagram() {
+        if (imageURI != null){
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("image/*");
+            share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            share.putExtra(Intent.EXTRA_STREAM, imageURI);
+            share.setPackage("com.instagram.android");
+            startActivity(Intent.createChooser(share, "ShareTo"));
+        } else {
+            Toast.makeText(this, "Please provide an image for the instagram post", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -116,10 +145,9 @@ public class CreatePostActivity extends AppCompatActivity {
                 imageURI = data.getData();
                 imageStream = getContentResolver().openInputStream(imageURI);
                 selectedImageBitmap = BitmapFactory.decodeStream(imageStream);
-                encodedImage = encodeImage(selectedImageBitmap);
+                encodedImageBAOS = encodeImage(selectedImageBitmap);
 
                 imagePost.setImageBitmap(selectedImageBitmap);
-                Log.d(TAG, "Encoded image is: " + encodedImage);
             } else {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
@@ -176,18 +204,5 @@ public class CreatePostActivity extends AppCompatActivity {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(b);
 
         return byteArrayInputStream;
-    }
-
-    private class UploadPostTask extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
     }
 }
