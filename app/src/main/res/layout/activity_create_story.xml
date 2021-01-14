@@ -1,113 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.CreateStoryActivity">
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/createStoryTitleId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Create A Story"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.CreateStoryActivity">
 
-    <Button
-        android:id="@+id/pickPhotoBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Pick A Photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createStoryTitleId" />
+        <TextView
+            android:id="@+id/createStoryTitleId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Create A Story"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pickPhotoBtn"
-        tools:srcCompat="@tools:sample/avatars" />
+        <Button
+            android:id="@+id/pickPhotoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Pick A Photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createStoryTitleId" />
 
-    <CheckBox
-        android:id="@+id/facebookCheckBox"
-        android:layout_width="100dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="20dp"
-        android:text="Facebook"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <ImageView
+            android:id="@+id/imageStory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickPhotoBtn"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="51dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/facebookCheckBox"
-        app:layout_constraintTop_toTopOf="@+id/facebookCheckBox"
-        app:srcCompat="@drawable/facebook" />
+        <CheckBox
+            android:id="@+id/facebookCheckBox"
+            android:layout_width="100dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="20dp"
+            android:text="Facebook"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageStory" />
 
-    <CheckBox
-        android:id="@+id/instagramCheckBox"
-        android:layout_width="100dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="16dp"
-        android:text="Instagram"
-        app:layout_constraintStart_toStartOf="@+id/facebookCheckBox"
-        app:layout_constraintTop_toBottomOf="@+id/facebookCheckBox" />
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="51dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/facebookCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/facebookCheckBox"
+            app:srcCompat="@drawable/facebook" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="51dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/instagramCheckBox"
-        app:layout_constraintTop_toTopOf="@+id/instagramCheckBox"
-        app:srcCompat="@drawable/instagram" />
+        <CheckBox
+            android:id="@+id/instagramCheckBox"
+            android:layout_width="100dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="16dp"
+            android:text="Instagram"
+            app:layout_constraintStart_toStartOf="@+id/facebookCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/facebookCheckBox" />
 
-    <CheckBox
-        android:id="@+id/twitterCheckBox"
-        android:layout_width="102dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="16dp"
-        android:text="Twitter"
-        app:layout_constraintStart_toStartOf="@+id/instagramCheckBox"
-        app:layout_constraintTop_toBottomOf="@+id/instagramCheckBox" />
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="51dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/instagramCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/instagramCheckBox"
+            app:srcCompat="@drawable/instagram" />
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="53dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/twitterCheckBox"
-        app:layout_constraintTop_toTopOf="@+id/twitterCheckBox"
-        app:srcCompat="@drawable/twitter" />
+        <CheckBox
+            android:id="@+id/twitterCheckBox"
+            android:layout_width="102dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:text="Twitter"
+            app:layout_constraintStart_toStartOf="@+id/instagramCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/instagramCheckBox" />
 
-    <Button
-        android:id="@+id/uploadStoryBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Upload Story"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/twitterCheckBox" />
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="53dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/twitterCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/twitterCheckBox"
+            app:srcCompat="@drawable/twitter" />
 
-    <fragment
-        android:id="@+id/fragment2"
-        android:name="com.example.socialmediaaggregatorapp.Fragments.BottomNavigationFragment"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/uploadStoryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:text="Upload Story"
+            app:layout_constraintBottom_toTopOf="@+id/fragment2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/twitterCheckBox" />
+
+        <fragment
+            android:id="@+id/fragment2"
+            android:name="com.example.socialmediaaggregatorapp.Fragments.BottomNavigationFragment"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

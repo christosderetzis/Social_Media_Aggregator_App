@@ -10,8 +10,8 @@
     <string name="twitter_Access_token_secret">mNj338uAX1mMCkLJP51d5Gi9ZKIdZXPf3alxyj3B3oSLp</string>
 
     <!-- Keys for accessing facebook -->
-    <string name="facebook_app_id">108375574450563</string>
-    <string name="fb_login_protocol_scheme">fb108375574450563</string>
+    <string name="facebook_app_id">774289829833566</string>
+    <string name="fb_login_protocol_scheme">fb774289829833566</string>
 
 
 </resources>

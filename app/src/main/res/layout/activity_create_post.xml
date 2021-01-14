@@ -104,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:text="Upload Post"
             app:layout_constraintBottom_toTopOf="@+id/fragment3"
             app:layout_constraintEnd_toEndOf="parent"
