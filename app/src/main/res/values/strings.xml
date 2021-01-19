@@ -13,5 +13,8 @@
     <string name="facebook_app_id">774289829833566</string>
     <string name="fb_login_protocol_scheme">fb774289829833566</string>
 
+    <string name="instagram_app_id">17841444557880145</string>
+    <string name="instagram_API_Key">EAALANmZACq14BAIdJM6AxltRGP2C6rTZAsoo6JZA6BGJ0EOQoZBDCw3hmgoJhRy21aGMIAXF3WXRtSrOvkjwOvk3EgV8metayhZCJ6m84zNj34g9aI6mVCcbXQZCBes4yFZCR4ZCjDn2OKwvAxc7hdZAlbLDKAbNZAYOk7A8YgfyULG2m9nv5ivzTcRm7ZA0buHhMlDh6CXytZAPjAZDZD</string>
+
 
 </resources>

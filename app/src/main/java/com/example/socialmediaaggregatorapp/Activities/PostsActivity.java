@@ -40,7 +40,7 @@ public class PostsActivity extends AppCompatActivity{
         Hashtag hashtag = (Hashtag) intent.getSerializableExtra("hashtag");
         postsTitle.setText("Famous posts containing hashtag: " + hashtag.getName());
 
-        GetPostsTask postsTask = new GetPostsTask(hashtag, postsArrayAdapter);
+        GetPostsTask postsTask = new GetPostsTask(this, hashtag, postsArrayAdapter);
         postsTask.execute();
 
         postsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -1,5 +1,6 @@
 package com.example.socialmediaaggregatorapp.Tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -27,9 +28,9 @@ public class GetTrendingHashtagsTask extends AsyncTask<String, Void, List<Hashta
     private HashtagArrayAdapter adapter;
     private TwitterService twitterService;
 
-    public GetTrendingHashtagsTask(HashtagArrayAdapter adapter) {
+    public GetTrendingHashtagsTask(Context context, HashtagArrayAdapter adapter) {
         this.adapter = adapter;
-        twitterService = new TwitterService();
+        twitterService = new TwitterService(context);
     }
 
     private List<Hashtag> parseHashtagData(String hashtagJsonData) {

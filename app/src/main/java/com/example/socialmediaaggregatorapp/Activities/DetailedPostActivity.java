@@ -133,7 +133,7 @@ public class DetailedPostActivity extends AppCompatActivity {
                         post.setFavorited(false);
                         post.setNumberOfLikes(post.getNumberOfLikes() - 1);
                     }
-                    new PostTwitterData(PostsActivity.postsArrayAdapter).execute(url);
+                    new PostTwitterData(DetailedPostActivity.this, PostsActivity.postsArrayAdapter).execute(url);
                 }
             });
             numberOfLikes.setText(post.getNumberOfLikes() + " likes");
@@ -161,7 +161,7 @@ public class DetailedPostActivity extends AppCompatActivity {
                         post.setRetweeted(false);
                         post.setNumberOfRetweets(post.getNumberOfRetweets() - 1);
                     }
-                    new PostTwitterData(PostsActivity.postsArrayAdapter).execute(url);
+                    new PostTwitterData(DetailedPostActivity.this, PostsActivity.postsArrayAdapter).execute(url);
                 }
             });
             numberOfRetweets.setVisibility(View.VISIBLE);

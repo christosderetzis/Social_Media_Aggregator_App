@@ -1,5 +1,6 @@
 package com.example.socialmediaaggregatorapp.Tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -54,12 +55,12 @@ public class GetPostsTask extends AsyncTask<String, Void, List<Post>> {
     private String instagram_top_posts_url;
     private String twitter_posts_url;
 
-    public GetPostsTask(Hashtag searchHashtag, PostsArrayAdapter adapter) {
+    public GetPostsTask(Context context, Hashtag searchHashtag, PostsArrayAdapter adapter) {
         this.searchHashtag = searchHashtag;
         postsArrayAdapter = adapter;
         postsList = new ArrayList<>();
-        twitterService = new TwitterService();
-        instagramService = new InstagramService(Long.valueOf("17841444557880145"));
+        twitterService = new TwitterService(context);
+        instagramService = new InstagramService(context);
     }
 
     private String getHashtagID(String jsonData) {

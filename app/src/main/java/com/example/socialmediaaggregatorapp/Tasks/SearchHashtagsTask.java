@@ -1,5 +1,6 @@
 package com.example.socialmediaaggregatorapp.Tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -32,13 +33,13 @@ public class SearchHashtagsTask extends AsyncTask<String, Void, List<Hashtag>> {
     private HashtagArrayAdapter adapter;
     private List<Hashtag> hashtags;
 
-    public SearchHashtagsTask(String searchQuery, HashtagArrayAdapter adapter) {
+    public SearchHashtagsTask(Context context, String searchQuery, HashtagArrayAdapter adapter) {
         try {
             url = BASE_URL + URLEncoder.encode("#"+searchQuery, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        twitterService = new TwitterService();
+        twitterService = new TwitterService(context);
         this.adapter = adapter;
     }
 

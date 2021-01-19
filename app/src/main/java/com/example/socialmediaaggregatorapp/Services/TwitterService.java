@@ -23,14 +23,18 @@ public class TwitterService {
 
     private MediaType mediaType = null;
 
-    public static final String Token = "706907411873931264-WOVVPLgbxvU5IL6GtxVRT1WUiVMxy0W";
-    public static final String Token_secret = "mNj338uAX1mMCkLJP51d5Gi9ZKIdZXPf3alxyj3B3oSLp";
-    public static final String Consumer_key = "le9u9MVYJ3Zr8ULLmbu4rEDWb";
-    public static final String Consumer_key_secret = "aja0OIUjLvBrU95IDCsl1ErcSwL8rIvOypUndS3owpUp4tsKUE";
+    private static String Token;
+    private static String Token_secret;
+    private static String Consumer_key;
+    private static String Consumer_key_secret;
 
     private TwitterOauthHeaderGenerator generator;
 
-    public TwitterService() {
+    public TwitterService(Context context) {
+        Token = context.getResources().getString(R.string.twitter_Access_token);
+        Token_secret = context.getResources().getString(R.string.twitter_Access_token_secret);
+        Consumer_key = context.getResources().getString(R.string.twitter_API_key);
+        Consumer_key_secret = context.getResources().getString(R.string.twitter_API_key_secret);
         generator = new TwitterOauthHeaderGenerator(Consumer_key, Consumer_key_secret, Token, Token_secret);
     }
 

@@ -1,6 +1,9 @@
 package com.example.socialmediaaggregatorapp.Services;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.example.socialmediaaggregatorapp.R;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -12,12 +15,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class InstagramService {
-    public static final String access_token = "EAALANmZACq14BAJFrtfXDikQDSKn3bfBzgUqEiU6TCGNRWq99gzZB8jU2nB7xNIP059WELlbbxqVcawxdZCSHb1cJBtbuN5qtvlC92YYhsp4Oh9ecT6WiCIj4cQLmm71ogU1foeZCx64mcXASB0IdUCPTrQ4YxBfAD8iXTrZB0VJo6SWI5pW79BpSHpTuKukeDjptD7Ih1yLNBPo1CS4Nw6OuT8NhB5xkpOO3ONGllAZDZD";
 
     private Long instagramIdAccount;
+    private String access_token;
 
-    public InstagramService(Long id){
-        instagramIdAccount = id;
+    public InstagramService(Context context){
+        instagramIdAccount = Long.valueOf(context.getResources().getString(R.string.instagram_app_id));
+        access_token = context.getResources().getString(R.string.instagram_API_Key);
     }
 
     public String downloadInstagramData(String URL) throws IOException {

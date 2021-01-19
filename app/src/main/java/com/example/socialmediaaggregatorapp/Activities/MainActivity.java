@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HashtagArrayAdapter(this, R.layout.hashtag_item, new ArrayList<Hashtag>(), hashtagListView);
 
         // Trending Hashtags Functionality
-        GetTrendingHashtagsTask getTwitterHashtagTask = new GetTrendingHashtagsTask(adapter);
+        GetTrendingHashtagsTask getTwitterHashtagTask = new GetTrendingHashtagsTask(this, adapter);
         getTwitterHashtagTask.execute();
 
         // Search hashtags functionality
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 resultsTitle.setText("Results for query: #" + searchQuery);
 
                 // Get results from backend
-                SearchHashtagsTask searchHashtagsTask = new SearchHashtagsTask(searchQuery, adapter);
+                SearchHashtagsTask searchHashtagsTask = new SearchHashtagsTask(MainActivity.this, searchQuery, adapter);
                 searchHashtagsTask.execute();
             }
         });

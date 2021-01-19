@@ -1,5 +1,6 @@
 package com.example.socialmediaaggregatorapp.Tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -33,8 +34,8 @@ public class PostTwitterData extends AsyncTask<String, Void, Post> {
     private TwitterService twitterService;
     private PostsArrayAdapter postsArrayAdapter;
 
-    public PostTwitterData(PostsArrayAdapter adapter) {
-        twitterService = new TwitterService();
+    public PostTwitterData(Context context, PostsArrayAdapter adapter) {
+        twitterService = new TwitterService(context);
         postsArrayAdapter = adapter;
     }
 
