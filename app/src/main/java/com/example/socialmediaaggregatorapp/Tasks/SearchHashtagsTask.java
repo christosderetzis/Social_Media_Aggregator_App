@@ -22,7 +22,7 @@ import java.util.List;
 
 public class SearchHashtagsTask extends AsyncTask<String, Void, List<Hashtag>> {
     public static final String TAG = "SMA_App";
-    public static final String BASE_URL = "https://api.twitter.com/1.1/search/tweets.json?q=";
+    public static final String BASE_URL = "https://api.twitter.com/1.1/search/tweets.json?count=100&q=";
     public static final String RESPONSE_TWEETS = "statuses";
     public static final String TWEET_ENTITIES = "entities";
     public static final String TWEET_HASHTAGS = "hashtags";

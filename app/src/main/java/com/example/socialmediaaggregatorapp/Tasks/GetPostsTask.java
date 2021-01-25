@@ -220,7 +220,7 @@ public class GetPostsTask extends AsyncTask<String, Void, List<Post>> {
         List<Post> instagram_posts = getInstagramPosts(instagram_posts_json);
 
         // Get posts from twitter api with the hashtag
-        twitter_posts_url = "https://api.twitter.com/1.1/search/tweets.json?q=" + searchHashtag.getQuery();
+        twitter_posts_url = "https://api.twitter.com/1.1/search/tweets.json?count=100&q=" + searchHashtag.getQuery();
         String twitter_posts_json = null;
         try {
             twitter_posts_json = twitterService.handleTwitterData(twitter_posts_url, "GET");
