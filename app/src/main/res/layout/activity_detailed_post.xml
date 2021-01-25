@@ -1,132 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.DetailedPostActivity">
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".Activities.DetailedPostActivity">
 
-        <ImageView
-            android:id="@+id/profileImage"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+                <ImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/socialMediaImage"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+                <ImageView
+                    android:id="@+id/socialMediaImage"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/postImage"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.523"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileImage"
-            tools:srcCompat="@tools:sample/avatars" />
+                <ImageView
+                    android:id="@+id/postImage"
+                    android:layout_width="400dp"
+                    android:layout_height="400dp"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.523"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profileImage"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="24dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/profileImage"
-            app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginTop="24dp"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@+id/profileImage"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/postText"
-            android:layout_width="372dp"
-            android:layout_height="67dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:text="TextView"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postImage" />
+                <TextView
+                    android:id="@+id/postText"
+                    android:layout_width="377dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="TextView"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/postImage" />
 
-        <TextView
-            android:id="@+id/dateCreatedText"
-            android:layout_width="254dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postText" />
+                <TextView
+                    android:id="@+id/dateCreatedText"
+                    android:layout_width="254dp"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/postText" />
 
-        <ImageButton
-            android:id="@+id/heartButton"
-            android:layout_width="46dp"
-            android:layout_height="44dp"
-            android:background="@null"
-            app:layout_constraintStart_toStartOf="@+id/dateCreatedText"
-            app:layout_constraintTop_toBottomOf="@+id/dateCreatedText"
-            app:srcCompat="@null" />
+                <ImageButton
+                    android:id="@+id/heartButton"
+                    android:layout_width="46dp"
+                    android:layout_height="44dp"
+                    android:background="@null"
+                    app:layout_constraintStart_toStartOf="@+id/dateCreatedText"
+                    app:layout_constraintTop_toBottomOf="@+id/dateCreatedText"
+                    app:srcCompat="@null" />
 
-        <TextView
-            android:id="@+id/likesNumberTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="10dp"
-            android:text="100 likes"
-            app:layout_constraintStart_toEndOf="@+id/heartButton"
-            app:layout_constraintTop_toBottomOf="@+id/dateCreatedText" />
+                <TextView
+                    android:id="@+id/likesNumberTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="10dp"
+                    android:text="100 likes"
+                    app:layout_constraintStart_toEndOf="@+id/heartButton"
+                    app:layout_constraintTop_toBottomOf="@+id/dateCreatedText" />
 
-        <ImageButton
-            android:id="@+id/retweetButton"
-            android:layout_width="46dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="4dp"
-            android:background="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/heartButton"
-            app:layout_constraintStart_toEndOf="@+id/likesNumberTxt"
-            app:srcCompat="@null" />
+                <ImageButton
+                    android:id="@+id/retweetButton"
+                    android:layout_width="46dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@null"
+                    app:layout_constraintBottom_toBottomOf="@+id/heartButton"
+                    app:layout_constraintStart_toEndOf="@+id/likesNumberTxt"
+                    app:srcCompat="@null" />
 
-        <TextView
-            android:id="@+id/retweetsNumberTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="50 retweets"
-            app:layout_constraintStart_toEndOf="@+id/retweetButton"
-            app:layout_constraintTop_toBottomOf="@+id/dateCreatedText" />
+                <TextView
+                    android:id="@+id/retweetsNumberTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="50 retweets"
+                    app:layout_constraintStart_toEndOf="@+id/retweetButton"
+                    app:layout_constraintTop_toBottomOf="@+id/dateCreatedText" />
 
-        <ImageButton
-            android:id="@+id/commentButton"
-            android:layout_width="46dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="5dp"
-            android:background="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/retweetButton"
-            app:layout_constraintStart_toEndOf="@+id/retweetsNumberTxt"
-            app:srcCompat="@drawable/comment" />
+                <ImageButton
+                    android:id="@+id/commentButton"
+                    android:layout_width="46dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@null"
+                    app:layout_constraintBottom_toBottomOf="@+id/retweetButton"
+                    app:layout_constraintStart_toEndOf="@+id/retweetsNumberTxt"
+                    app:srcCompat="@drawable/comment" />
 
-        <TextView
-            android:id="@+id/commentsNumberTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="2 comments"
-            app:layout_constraintStart_toEndOf="@+id/commentButton"
-            app:layout_constraintTop_toBottomOf="@+id/dateCreatedText" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/commentsNumberTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="2 comments"
+                    app:layout_constraintStart_toEndOf="@+id/commentButton"
+                    app:layout_constraintTop_toBottomOf="@+id/dateCreatedText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
