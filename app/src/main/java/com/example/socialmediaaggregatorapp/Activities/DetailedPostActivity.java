@@ -107,7 +107,13 @@ public class DetailedPostActivity extends AppCompatActivity {
         }
 
         // Update post dateTime
-        postDateTime.setText(post.getDate());
+        if (post.getType().equals(Post.socialMediaType.twitter)) {
+            String processedDate = processTwitterDateTime(post.getDate());
+            postDateTime.setText(processedDate);
+        } else if (post.getType().equals(Post.socialMediaType.instagram)){
+            String processedDate = processInstagramDateTime(post.getDate());
+            postDateTime.setText(processedDate);
+        }
 
         // update icons based on the social media type
         if (post.getType().equals(Post.socialMediaType.twitter)) {
@@ -191,5 +197,34 @@ public class DetailedPostActivity extends AppCompatActivity {
             });
             numberOfComments.setText(post.getNumberOfComments() + " comments");
         }
+    }
+
+    private String processTwitterDateTime(String rawDateTime) {
+        String[] elements = rawDateTime.split(" ");
+        String[] months = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
+
+        // Get elements of the dateTime
+        String year = elements[5];
+        int month = java.util.Arrays.asList(months).indexOf(elements[1]) + 1;
+        String day = elements[2];
+        String time = elements[3];
+
+        return day + "/" + month + "/" + year + " " + time;
+    }
+
+    private String processInstagramDateTime(String rawDateTime) {
+        // Process Date substring
+        int endDateIndex = rawDateTime.indexOf("T");
+        String dateSubstring = rawDateTime.substring(0, endDateIndex);
+        String[] dateElements = dateSubstring.split("-");
+        String day = dateElements[2];
+        String month = dateElements[1];
+        String year = dateElements[0];
+
+        // Get time Substring
+        int endTimeIndex = rawDateTime.indexOf("+");
+        String timeSubstring = rawDateTime.substring(endDateIndex + 1, endTimeIndex);
+
+        return day + "/" + month + "/" + year + " " + timeSubstring;
     }
 }
