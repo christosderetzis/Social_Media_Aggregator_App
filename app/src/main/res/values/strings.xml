@@ -4,16 +4,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Keys for accessing twitter -->
-    <string name="twitter_API_key">le9u9MVYJ3Zr8ULLmbu4rEDWb</string>
-    <string name="twitter_API_key_secret">aja0OIUjLvBrU95IDCsl1ErcSwL8rIvOypUndS3owpUp4tsKUE</string>
-    <string name="twitter_Access_token">706907411873931264-WOVVPLgbxvU5IL6GtxVRT1WUiVMxy0W</string>
-    <string name="twitter_Access_token_secret">mNj338uAX1mMCkLJP51d5Gi9ZKIdZXPf3alxyj3B3oSLp</string>
+    <string name="twitter_API_key"></string>
+    <string name="twitter_API_key_secret"></string>
+    <string name="twitter_Access_token"></string>
+    <string name="twitter_Access_token_secret"></string>
 
     <!-- Keys for accessing facebook -->
-    <string name="facebook_app_id">774289829833566</string>
-    <string name="fb_login_protocol_scheme">fb774289829833566</string>
+    <string name="facebook_app_id"></string>
+    <string name="fb_login_protocol_scheme"></string>
 
     <!-- Keys for accessing instagram -->
-    <string name="instagram_app_id">17841444557880145</string>
-    <string name="instagram_API_Key">EAALANmZACq14BAFpYYWAGI3WPtEJbtr3gWcqgluZAFHnxOH5ZAzngTvSZByz5mEZAVKfiIkbfOxAgVpfJbkU6XriqQ2jhmMtfsKPP8qRiUQ3vTCyQV9PZA0motRyRaMJA7kakiAAACqEx5aPoZA0ZAnNPonn1aDsZC94KXurP27hF1Bs1wLgiJNqC92IC8JIRcJDNFBHnoKJlngZDZD</string>
+    <string name="instagram_app_id"></string>
+    <string name="instagram_API_Key"></string>
 </resources>
